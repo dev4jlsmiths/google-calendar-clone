@@ -24,6 +24,18 @@ export default function EventModal() {
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
   );
+  const [location, setLocation] = useState(
+    selectedEvent ? selectedEvent.location : ""
+  );
+  const [reminder, setReminder] = useState(
+    selectedEvent ? selectedEvent.reminder : "none"
+  );
+  const [repeat, setRepeat] = useState(
+    selectedEvent ? selectedEvent.repeat : "none"
+  );
+  const [attendees, setAttendees] = useState(
+    selectedEvent ? selectedEvent.attendees : ""
+  );
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
@@ -35,6 +47,10 @@ export default function EventModal() {
     const calendarEvent = {
       title,
       description,
+      location,
+      reminder,
+      repeat,
+      attendees,
       label: selectedLabel,
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
@@ -103,6 +119,55 @@ export default function EventModal() {
               required
               className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               onChange={(e) => setDescription(e.target.value)}
+            />
+            <span className="material-icons-outlined text-gray-400">
+              place
+            </span>
+            <input
+              type="text"
+              name="location"
+              placeholder="Add location"
+              value={location}
+              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              onChange={(e) => setLocation(e.target.value)}
+            />
+            <span className="material-icons-outlined text-gray-400">
+              notifications
+            </span>
+            <select
+              value={reminder}
+              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              onChange={(e) => setReminder(e.target.value)}
+            >
+              <option value="none">No Reminder</option>
+              <option value="10min">10 minutes before</option>
+              <option value="30min">30 minutes before</option>
+              <option value="1hr">1 hour before</option>
+              <option value="1day">1 day before</option>
+            </select>
+            <span className="material-icons-outlined text-gray-400">
+              repeat
+            </span>
+            <select
+              value={repeat}
+              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              onChange={(e) => setRepeat(e.target.value)}
+            >
+              <option value="none">No Repeat</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+            <span className="material-icons-outlined text-gray-400">
+              people
+            </span>
+            <input
+              type="text"
+              name="attendees"
+              placeholder="Add attendees"
+              value={attendees}
+              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              onChange={(e) => setAttendees(e.target.value)}
             />
             <span className="material-icons-outlined text-gray-400">
               bookmark_border
